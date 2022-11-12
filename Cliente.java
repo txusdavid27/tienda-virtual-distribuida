@@ -13,7 +13,7 @@ public class Cliente {
         Interfaz interfaz = (Interfaz) registry.lookup("Tienda Virtual"); // Buscar en el registro...
         Scanner sc = new Scanner(System.in);
         int eleccion;
-        float id, cantidad;
+        Integer id, cantidad;
         String menu = "\n\n------------------\n\n[-1] => Salir\n[0] => Consultar\n[1] => Adquirir\nElige: ";
         do {
             System.out.println(menu);
@@ -34,18 +34,18 @@ public class Cliente {
                     case 1:
                         System.out.println("Ingresa el id del producto: ");
                         try {
-                            id = Float.parseFloat(sc.nextLine());
+                            id = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             id = 0;
                         }
 
                         System.out.println("Ingresa la cantidad: ");
                         try {
-                            cantidad = Float.parseFloat(sc.nextLine());
+                            cantidad = Integer.parseInt(sc.nextLine());
                         } catch (NumberFormatException e) {
                             cantidad = 0;
                         }
-                        interfaz.adquirir(id, cantidad);
+                        System.out.println(interfaz.adquirir(id, cantidad));
                         break;
                 }
 
