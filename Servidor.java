@@ -32,27 +32,28 @@ public class Servidor {
             public String adquirir(Integer id, Integer cantidad) throws RemoteException {
                 // Escribir archivo
                 leerRegistros();
-                imprimir();
+                //System.out.println(id);
+                //imprimir();
                 int resta=0;
                 for(int i=0; i<listaProductos.size();i++){
-                    if(listaProductos.get(i).ID==id){
+                    //System.out.println( listaProductos.get(i).ID );
+                    if(listaProductos.get(i).ID.equals(id)){
                         resta = listaProductos.get(i).cantidad - cantidad;
                         if(resta>=0){
                             listaProductos.get(i).cantidad=resta;
+                            System.out.println("Actualizando...");
+                            try{
+                                actualizarRegistro();
+                            }catch(Exception e){};
+                            return "Adquisición exitosa!\n";
                         }else{
-                            return "\nProducto: "+listaProductos.get(i).nombre+" Agotado."
+                            return "\nCantidad ->Producto: "+listaProductos.get(i).nombre+" No disponible."
                             +"\n Disponibles: "+listaProductos.get(i).cantidad
                             +"\n Solicitados: "+cantidad+"\n";
                         }
-                    }else{
-                        return "Producto No Registrado.";
                     }
                 }
-                System.out.println("Actualizando...");
-                try{
-                    actualizarRegistro();
-                }catch(Exception e){};
-                return "Adquisición exitosa!\n";
+                return "Producto No Registrado.\n";
             };
         }, 0);
 
