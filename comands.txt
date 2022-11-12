@@ -1,0 +1,2 @@
+java Cliente 8080
+javac Servidor.java
